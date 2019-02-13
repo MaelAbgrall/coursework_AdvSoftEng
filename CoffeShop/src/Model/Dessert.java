@@ -1,5 +1,9 @@
 package Model;
 
+/**
+ * @author Ahmed ALJeferi
+ *
+ */
 public class Dessert extends Item {
 	
 	

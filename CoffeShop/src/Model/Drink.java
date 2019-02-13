@@ -1,5 +1,10 @@
 package Model;
 
+/**
+ * @author Ahmed ALJeferi
+ *
+ */
+
 public class Drink extends Item {
 	
 	public boolean alcohoic = false;
@@ -11,7 +16,11 @@ public class Drink extends Item {
         this.discription = discrioption;
 		MENUCOUNTER.add(id);
 		
-	}
+        }
+        public Drink (String name){
+        this.name = name ;
+        this.createID();
+        }
 
 	@Override
 	public String createID() {
@@ -20,5 +29,6 @@ public class Drink extends Item {
         MENUCOUNTER.add(this.id);
         return this.id;
 	}
+	
 
 }

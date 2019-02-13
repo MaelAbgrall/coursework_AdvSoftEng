@@ -1,5 +1,11 @@
 package Model;
 
+/**
+ * @author Ahmed ALJeferi
+ *
+ */
+
+
 public class Food extends Item {
 	
 	
@@ -12,7 +18,11 @@ public class Food extends Item {
         MENUCOUNTER.add(id);
 
         
-	}
+        }
+        public Food (String name){
+                this.name = name ;
+                this.createID();
+                }
 
 	@Override
 	public String createID() {
