@@ -9,7 +9,7 @@ public class Drink extends Item {
 	
 	public boolean alcohoic = false;
 
-	public Drink(String name , String id , Double price , String discrioption) {
+	public Drink(String id , String name , Double price , String discrioption) {
         this.name = name ;
         this.id = id ;
         this.price = price;
@@ -28,6 +28,11 @@ public class Drink extends Item {
         this.id  = "DR" + rdnm;
         MENUCOUNTER.add(this.id);
         return this.id;
+	}
+	@Override
+	public String getLine() {
+		String line = this.id+","+this.name+","+this.price+","+this.discription+","+this.alcohoic;
+		return line;
 	}
 	
 

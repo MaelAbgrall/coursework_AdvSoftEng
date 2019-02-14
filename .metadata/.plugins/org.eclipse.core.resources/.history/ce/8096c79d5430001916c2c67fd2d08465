@@ -8,7 +8,7 @@ public class Dessert extends Item {
 	
 	
 
-	public Dessert(String id , String name , Double price , String discrioption) {
+	public Dessert(String name , String id , Double price , String discrioption) {
         this.name = name ;
         this.id = id ;
         this.price = price;
@@ -26,11 +26,6 @@ public class Dessert extends Item {
         this.id  = "DS" + rdnm;
         MENUCOUNTER.add(this.id);
         return this.id;
-	}
-	@Override
-	public String getLine() {
-		String line = this.id+","+this.name+","+this.price+","+this.discription;
-		return line;
 	}
 	
 

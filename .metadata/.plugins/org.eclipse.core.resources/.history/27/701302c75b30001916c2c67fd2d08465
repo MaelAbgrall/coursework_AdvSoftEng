@@ -12,10 +12,9 @@ import java.util.Set;
 import java.util.TreeSet;
 
 public class MenuItems {
-	Set<Item> menuitem = new TreeSet<Item>();
-	
-	
-	///////this part for test pourpose only as it contain main and change things to static 
+
+    
+
   /*   public static void main(String[] args) throws IOException {
         Set<Item> menuitem = new TreeSet<Item>();
         System.out.println("TEstttttt ");
@@ -67,34 +66,8 @@ public class MenuItems {
     */
 
     public void loadfrmCSV (String fileName){
-    	Scanner scan = new Scanner (fileName);
-    	while (scan.hasNextLine()){
-    		String line = scan.nextLine();
-    		String[] result = line.split(",");
-    		String type = result[0].substring(0, 2);
-    		Item temp ;
+        
 
-    		switch (type){
-    		case "DR":
-    			Drink tempD = new Drink(result[0],result[1],Double.valueOf(result[2]),result[3]);
-    			if (result[4]=="true"){    				
-    				tempD.alcohoic= true;    				
-    			}
-    			   this.menuitem.add(tempD);    			
-    			break;
-    		case "DS":
-    			temp = new Dessert (result[0],result[1],Double.valueOf(result[2]),result[3]);
-    			
-    			break;
-    		case "FD":
-    			temp = new Food (result[0],result[1],Double.valueOf(result[2]),result[3]);
-    			
-    			break;
-    			    		
-    		}
-    		
-    	}
-    	
 
     }
     public void loadToCSV (String fileName, Set<Item> set) throws IOException{

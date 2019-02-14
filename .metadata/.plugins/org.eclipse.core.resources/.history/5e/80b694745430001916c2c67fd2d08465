@@ -10,7 +10,7 @@ public class Food extends Item {
 	
 	
 
-	public Food(String id , String name , Double price , String discrioption) {
+	public Food(String name , String id , Double price , String discrioption) {
         this.name = name ;
         this.id = id ;
         this.price = price;
@@ -31,12 +31,5 @@ public class Food extends Item {
         MENUCOUNTER.add(this.id);
         return this.id;
 	}
-	@Override
-	public String getLine() {
-		String line = this.id+","+this.name+","+this.price+","+this.discription;
-		return line;
-	}
-	
-
 
 }
