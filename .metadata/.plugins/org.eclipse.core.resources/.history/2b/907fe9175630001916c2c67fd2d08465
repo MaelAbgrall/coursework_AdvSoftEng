@@ -15,7 +15,7 @@ public class MenuItems {
 
     
 
-  /*   public static void main(String[] args) throws IOException {
+     public static void main(String[] args) {
         Set<Item> menuitem = new TreeSet<Item>();
         System.out.println("TEstttttt ");
         
@@ -47,23 +47,13 @@ public class MenuItems {
                 break;
 
         }
-        loadToCSV("test.csv",menuitem);
+        
 
-             
+        
+
+
         
     }
-    public static void loadToCSV (String fileName, Set<Item> set) throws IOException{
-        Iterator<Item> itr = set.iterator();
-        FileWriter fw = new FileWriter(fileName);
-    while (itr.hasNext()) {
-    	Item i =itr.next();   	
-
-    	fw.write(i.getLine());
-    	   	
-    }
-    fw.close();        
-    }
-    */
 
     public void loadfrmCSV (String fileName){
         
@@ -74,12 +64,16 @@ public class MenuItems {
         Iterator<Item> itr = set.iterator();
         FileWriter fw = new FileWriter(fileName);
     while (itr.hasNext()) {
-    	Item i =itr.next();   	
+    	Item i =itr.next();
+    	String line = i.id
 
-    	fw.write(i.getLine());
-    	   	
+    	fw.write(null);
+    	
+    	
+       
     }
-    fw.close();        
+
+        
     }
 
 

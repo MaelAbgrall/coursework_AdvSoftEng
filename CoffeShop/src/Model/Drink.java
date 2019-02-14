@@ -29,6 +29,11 @@ public class Drink extends Item {
         MENUCOUNTER.add(this.id);
         return this.id;
 	}
+	@Override
+	public String getLine() {
+		String line = this.id+","+this.name+","+this.price+","+this.discription+","+this.alcohoic;
+		return line;
+	}
 	
 
 }
