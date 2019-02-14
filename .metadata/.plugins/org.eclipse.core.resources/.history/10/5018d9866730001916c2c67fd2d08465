@@ -72,22 +72,16 @@ public class MenuItems {
     		String line = scan.nextLine();
     		String[] result = line.split(",");
     		String type = result[0].substring(0, 2);
-    		Item temp ;
 
     		switch (type){
     		case "DR":
-    			Drink tempD = new Drink(result[0],result[1],Double.valueOf(result[2]),result[3]);
-    			if (result[4]=="true"){    				
-    				tempD.alcohoic= true;    				
-    			}
-    			   this.menuitem.add(tempD);    			
+    			Item temp = new Drink(result[0],result[1])
+    			
     			break;
     		case "DS":
-    			temp = new Dessert (result[0],result[1],Double.valueOf(result[2]),result[3]);
     			
     			break;
     		case "FD":
-    			temp = new Food (result[0],result[1],Double.valueOf(result[2]),result[3]);
     			
     			break;
     			    		
