@@ -10,7 +10,7 @@ public class Food extends Item {
 	
 	
 
-	public Food(String name , String id , Double price , String discrioption) {
+	public Food(String id , String name , Double price , String discrioption) {
         this.name = name ;
         this.id = id ;
         this.price = price;
