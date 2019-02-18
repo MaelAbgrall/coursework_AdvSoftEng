@@ -4,6 +4,8 @@ package Model;
  *
  */
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Iterator;
@@ -15,7 +17,7 @@ public class MenuItems {
 	Set<Item> menuitem = new TreeSet<Item>();
 	
 	
-	///////this part for test pourpose only as it contain main and change things to static 
+	//////this part for test pourpose only as it contain main and change things to static 
   /*   public static void main(String[] args) throws IOException {
         Set<Item> menuitem = new TreeSet<Item>();
         System.out.println("TEstttttt ");
@@ -66,10 +68,13 @@ public class MenuItems {
     }
     */
 
-    public void loadfrmCSV (String fileName){
-    	Scanner scan = new Scanner (fileName);
+    public void loadfrmCSV (String fileName) throws FileNotFoundException{
+    	File file = new File (fileName);
+    	Scanner scan = new Scanner (file);
+    	
     	while (scan.hasNextLine()){
     		String line = scan.nextLine();
+    		
     		String[] result = line.split(",");
     		String type = result[0].substring(0, 2);
     		Item temp ;
@@ -84,10 +89,12 @@ public class MenuItems {
     			break;
     		case "DS":
     			temp = new Dessert (result[0],result[1],Double.valueOf(result[2]),result[3]);
+    			this.menuitem.add(temp);
     			
     			break;
     		case "FD":
     			temp = new Food (result[0],result[1],Double.valueOf(result[2]),result[3]);
+    			this.menuitem.add(temp);
     			
     			break;
     			    		
@@ -103,7 +110,7 @@ public class MenuItems {
     while (itr.hasNext()) {
     	Item i =itr.next();   	
 
-    	fw.write(i.getLine());
+    	fw.write(i.getLine()+"\n");
     	   	
     }
     fw.close();        

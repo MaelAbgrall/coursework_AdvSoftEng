@@ -1,9 +1,0 @@
-package Model;
-
-public class Drink {
-
-	public Drink() {
-		// TODO Auto-generated constructor stub
-	}
-
-}
