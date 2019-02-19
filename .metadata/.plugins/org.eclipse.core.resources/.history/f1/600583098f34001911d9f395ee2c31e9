@@ -43,9 +43,7 @@ public class OrderProcessing {
 			for (Item itm : ord.items.keySet()){
 				int count = ord.items.get(itm);
 				for (int i = count ; i==0;i--){
-					SimpleDateFormat formatter6 =new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-					String timeStamp = formatter6.format(ord.d);
-					records +=  itm.id+","+timeStamp+","+ord.customer.id+","+ord.id+","+ord.customer.name+"\n";
+					records +=  itm.id+","+ord.d+","+ord.customer.id+","+ord.id+","+ord.customer.name+"\n";
 				}
 			}
 			
