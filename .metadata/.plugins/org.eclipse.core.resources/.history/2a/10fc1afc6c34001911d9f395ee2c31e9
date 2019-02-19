@@ -26,7 +26,6 @@ public class TestingRun {
 		ol.loadDataHistory("/home/msc/aaa50/Desktop/Github/coursework_AdvSoftEng/CoffeShop/Data", menu);
 		
 		
-		
 		// 
 		//Testing loading from file and to file 
 		/*MenuItems mi = new MenuItems();

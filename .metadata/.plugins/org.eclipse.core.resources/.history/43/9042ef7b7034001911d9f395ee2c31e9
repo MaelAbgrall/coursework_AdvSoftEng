@@ -55,7 +55,6 @@ public class OrderProcessing {
 				}
 				break;
 			}	
-		
 		}
 		if (!flag){
 			Customer c = new Customer (record[2],record[4]);
@@ -70,7 +69,6 @@ public class OrderProcessing {
 			
 		}
 	}
-	
 
 }
 

@@ -19,13 +19,7 @@ public class TestingRun {
 
 
 		// Testing read the directory 
-		MenuItems menu = new MenuItems();
-		menu.loadfrmCSV("/home/msc/aaa50/Desktop/Github/coursework_AdvSoftEng/CoffeShop/Menue.csv");
-		
 		OrderList ol = new OrderList();
-		ol.loadDataHistory("/home/msc/aaa50/Desktop/Github/coursework_AdvSoftEng/CoffeShop/Data", menu);
-		
-		
 		
 		// 
 		//Testing loading from file and to file 

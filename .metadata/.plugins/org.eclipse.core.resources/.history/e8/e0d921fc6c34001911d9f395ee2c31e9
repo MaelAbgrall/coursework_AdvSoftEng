@@ -55,12 +55,11 @@ public class OrderProcessing {
 				}
 				break;
 			}	
-		
 		}
 		if (!flag){
 			Customer c = new Customer (record[2],record[4]);
 			Order ordr = new Order(record[0],c);
-			SimpleDateFormat formatter6 =new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+			SimpleDateFormat formatter6 =new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
 			Date d = formatter6.parse(record[1]);
 			ordr.setDate(d);
 			Item item = this.menuItems.getItmeByID(record[0]);
@@ -70,7 +69,6 @@ public class OrderProcessing {
 			
 		}
 	}
-	
 
 }
 

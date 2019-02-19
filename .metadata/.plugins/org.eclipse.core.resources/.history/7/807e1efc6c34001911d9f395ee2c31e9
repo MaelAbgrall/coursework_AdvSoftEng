@@ -104,10 +104,6 @@ public class MenuItems {
     		}
     		
     	}
-    	for (Item x : this.menuitem){
-    		System.out.println(x.getLine());
-    	}
-    	
     	 }
     public void loadToCSV (String fileName, Set<Item> set) throws IOException{
         Iterator<Item> itr = set.iterator();
