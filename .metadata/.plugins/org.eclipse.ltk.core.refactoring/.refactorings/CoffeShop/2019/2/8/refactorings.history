@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename local variable &apos;o&apos; in &apos;Model.OrderProcessing.readLine(...)&apos; to &apos;order&apos;&#x0A;- Original project: &apos;CoffeShop&apos;&#x0A;- Original element: &apos;Model.OrderProcessing.readLine(String).o&apos;&#x0A;- Renamed element: &apos;o&apos;&#x0A;- Update references to refactored element" description="Rename local variable &apos;o&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src&lt;Model{OrderProcessing.java[OrderProcessing~readLine~QString;@o!705!731!711!711!QOrder;!0!false" name="order" references="true" stamp="1550582757138" version="1.0"/>
+</session>

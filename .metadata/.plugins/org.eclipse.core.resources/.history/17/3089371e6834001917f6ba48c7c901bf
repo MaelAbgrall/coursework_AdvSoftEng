@@ -52,8 +52,7 @@ public class OrderProcessing {
 				}
 				else {  //add new item to the existing order 
 					order.addItem(item, 1);
-				}
-				break;
+				}				
 			}	
 		}
 		if (!flag){
@@ -64,7 +63,9 @@ public class OrderProcessing {
 			ordr.setDate(d);
 			Item item = this.menuItems.getItmeByID(record[0]);
 			ordr.addItem(item, 1);
-			this.procssedOrdr.add(ordr);	
+			this.procssedOrdr.add(ordr);
+			
+			
 			
 			
 		}

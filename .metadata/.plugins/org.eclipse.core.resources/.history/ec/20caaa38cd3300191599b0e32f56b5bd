@@ -2,7 +2,6 @@ package Model;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.Iterator;
 
 public class TestingRun {
@@ -15,12 +14,12 @@ public class TestingRun {
 		
 	}
 
-	public static void main(String[] args) throws IOException, ParseException {
+	public static void main(String[] args) throws IOException {
 
 
 		// Testing read the directory 
 		OrderList ol = new OrderList();
-		
+		ol.getFiles("/home/msc/aaa50/Desktop/Github/coursework_AdvSoftEng/CoffeShop/src/Model");
 		// 
 		//Testing loading from file and to file 
 		/*MenuItems mi = new MenuItems();

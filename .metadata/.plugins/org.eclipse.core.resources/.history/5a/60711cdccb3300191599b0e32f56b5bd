@@ -96,11 +96,14 @@ public class MenuItems {
     			temp = new Food (result[0],result[1],Double.valueOf(result[2]),result[3]);
     			this.menuitem.add(temp);
     			
-    			break;    			    		
+    			break;
+    			    		
     		}
     		
     	}
-    	 }
+    	
+
+    }
     public void loadToCSV (String fileName, Set<Item> set) throws IOException{
         Iterator<Item> itr = set.iterator();
         FileWriter fw = new FileWriter(fileName);
@@ -112,18 +115,6 @@ public class MenuItems {
     }
     fw.close();        
     }
-    public Item getItmeByID (String id ){
-    	Boolean flag = false;
-    	Item i = null;
-    	 for (Item itm : this.menuitem){
-    		if (itm.id.equals(id)){
-    			i = itm;    			   			
-    		}
-    		
-    	}
-    		return i;			
-    }
-    
 
 
 

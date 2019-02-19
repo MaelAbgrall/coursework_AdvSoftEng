@@ -112,18 +112,6 @@ public class MenuItems {
     }
     fw.close();        
     }
-    public Item getItmeByID (String id ){
-    	Boolean flag = false;
-    	Item i = null;
-    	 for (Item itm : this.menuitem){
-    		if (itm.id.equals(id)){
-    			i = itm;    			   			
-    		}
-    		
-    	}
-    		return i;			
-    }
-    
 
 
 

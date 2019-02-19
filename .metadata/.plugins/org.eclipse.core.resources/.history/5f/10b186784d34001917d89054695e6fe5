@@ -22,14 +22,11 @@ public class Order {
 		d.setTime(System.currentTimeMillis());
 		
 	}
-	public Order (String id , Customer customer){
+	public Order (String id , Date d,Customer customer){
 		this.id = id;
-		
+		this.d = d;
 		this.customer = customer;
 			
-	}
-	public void setDate (Date d){
-		this.d = d;
 	}
 	
 	

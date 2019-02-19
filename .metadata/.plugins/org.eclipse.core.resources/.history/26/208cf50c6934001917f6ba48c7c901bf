@@ -20,7 +20,7 @@ public class TestingRun {
 
 		// Testing read the directory 
 		OrderList ol = new OrderList();
-		
+		ol.getFiles("/home/msc/aaa50/Desktop/Github/coursework_AdvSoftEng/CoffeShop/src/Model");
 		// 
 		//Testing loading from file and to file 
 		/*MenuItems mi = new MenuItems();
