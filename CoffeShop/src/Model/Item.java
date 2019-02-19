@@ -13,7 +13,8 @@ public abstract class Item implements Comparable<Item>{
 	public Double price;
 	public String discription;
 	
-	public abstract String createID (); 
+	public abstract String createID ();
+	public abstract String getLine();
 	
 	public void setPrice (Double price){
 		this.price = price;
@@ -26,6 +27,7 @@ public abstract class Item implements Comparable<Item>{
 		// TODO Auto-generated method stub
 		return this.id.compareTo(i.id);
 	}
+	
 	
 	
 }

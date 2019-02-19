@@ -1,0 +1,18 @@
+package Model;
+
+public class TestingRun {
+
+	public TestingRun() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		OrderList ol = new OrderList();
+		ol.getFiles("/home/msc/aaa50/Desktop/Github/coursework_AdvSoftEng/CoffeShop/src/Model");
+		
+
+	}
+
+}
