@@ -16,9 +16,9 @@ import java.util.TreeSet;
 public class MenuItems {
 	Set<Item> menuitem = new TreeSet<Item>();
 	
-	
-	//////this part for test pourpose only as it contain main and change things to static 
+		//////this part for test pourpose only as it contain main and change things to static 
   /*   public static void main(String[] args) throws IOException {
+
         Set<Item> menuitem = new TreeSet<Item>();
         System.out.println("TEstttttt ");
         
@@ -67,8 +67,12 @@ public class MenuItems {
     fw.close();        
     }
     */
-
-    public void loadfrmCSV (String fileName) throws FileNotFoundException{
+	
+	public MenuItems (){
+		
+	}
+    
+	public void loadfrmCSV (String fileName) throws FileNotFoundException{
     	File file = new File (fileName);
     	Scanner scan = new Scanner (file);
     	
@@ -96,14 +100,15 @@ public class MenuItems {
     			temp = new Food (result[0],result[1],Double.valueOf(result[2]),result[3]);
     			this.menuitem.add(temp);
     			
-    			break;
-    			    		
+    			break;    			    		
     		}
     		
     	}
+    	for (Item x : this.menuitem){
+    		System.out.println(x.getLine());
+    	}
     	
-
-    }
+    	 }
     public void loadToCSV (String fileName, Set<Item> set) throws IOException{
         Iterator<Item> itr = set.iterator();
         FileWriter fw = new FileWriter(fileName);
@@ -115,6 +120,18 @@ public class MenuItems {
     }
     fw.close();        
     }
+    public Item getItmeByID (String id ){
+    	Boolean flag = false;
+    	Item i = null;
+    	 for (Item itm : this.menuitem){
+    		if (itm.id.equals(id)){
+    			i = itm;    			   			
+    		}
+    		
+    	}
+    		return i;			
+    }
+    
 
 
 

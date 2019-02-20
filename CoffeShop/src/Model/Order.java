@@ -14,7 +14,7 @@ public class Order {
 	Date d = new Date();
 	Customer customer;
 	TreeMap<Item,Integer> items ;
-	Boolean preperedFlag = false;
+	private  Boolean preperedFlag = false;
 	Double totalCost ;
 	
 	public Order() {
@@ -22,6 +22,16 @@ public class Order {
 		d.setTime(System.currentTimeMillis());
 		
 	}
+	public Order (String id , Customer customer){
+		this.id = id;
+		
+		this.customer = customer;
+			
+	}
+	public void setDate (Date d){
+		this.d = d;
+	}
+	
 	
 	public void addItem (Item item , int count){
 		
@@ -34,6 +44,8 @@ public class Order {
 	public void setPreperedFlag(Boolean preperedFlag) {
 		this.preperedFlag = preperedFlag;
 	}
+	
+	
 	
 
 }

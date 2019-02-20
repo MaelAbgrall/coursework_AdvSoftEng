@@ -1,0 +1,48 @@
+package Model;
+
+
+import java.util.Date;
+import java.util.TreeMap;
+
+/**
+ * @author ALI AHMAD A ALASMARE 
+ *
+ */
+
+public class Order {
+	String id ;
+	Date d = new Date();
+	Customer customer;
+	TreeMap<Item,Integer> items ;
+	private  Boolean preperedFlag = false;
+	Double totalCost ;
+	
+	public Order() {
+		
+		d.setTime(System.currentTimeMillis());
+		
+	}
+	public Order (String id , Date d,Customer customer){
+		this.id = id;
+		this.d = d;
+		this.customer = customer;
+			
+	}
+	
+	
+	public void addItem (Item item , int count){
+		
+	}
+
+	public Boolean getPreperedFlag() {
+		return preperedFlag;
+	}
+
+	public void setPreperedFlag(Boolean preperedFlag) {
+		this.preperedFlag = preperedFlag;
+	}
+	
+	
+	
+
+}
