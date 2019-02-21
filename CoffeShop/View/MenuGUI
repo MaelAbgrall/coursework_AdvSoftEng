@@ -106,11 +106,40 @@ public class CoffeeShopMenu implements ActionListener, ItemListener  {
         menuItem.setAccelerator(KeyStroke.getKeyStroke(
                 KeyEvent.VK_3, ActionEvent.ALT_MASK));
         submenu.add(menuItem);
+        
+        // adding individual items to the sub-menu
+         DefaultListModel<String> l3 = new DefaultListModel<>();  
+          l3.addElement("burger sandwich");  
+          l3.addElement("Jacket Potato");  
+          l3.addElement("Soup");  
+          l3.addElement("sausage roll");  
+          JList<String> list3 = new JList<>(l3);  
+          list3.setBounds(100,100, 75,75);  
+          submenu.add(list3);
+          submenu.setSize(400, 400);
+          submenu.setLayout(null);
+          submenu.setVisible(true);
+          filemenu.add(submenu);
+
  
         menuItem = new JMenuItem("Cold food");
         submenu.add(menuItem);
         filemenu.add(submenu);
         
+        // adding individual items to the sub-menu
+         DefaultListModel<String> l4 = new DefaultListModel<>();  
+          l4.addElement("cheese sandwich");  
+          l4.addElement("chicken cesear");  
+          l4.addElement("salad");  
+          l4.addElement("ham sandwich");  
+          JList<String> list4 = new JList<>(l4);  
+          list4.setBounds(100,100, 75,75);  
+          submenu.add(list4);
+          submenu.setSize(400, 400);
+          submenu.setLayout(null);
+          submenu.setVisible(true);
+          filemenu.add(submenu);
+
         
         
        //menu items, dessert section
@@ -132,6 +161,20 @@ public class CoffeeShopMenu implements ActionListener, ItemListener  {
         menuItem = new JMenuItem("Available desserts");
         submenu.add(menuItem);
         filemenu.add(submenu);
+
+        // adding individual items to the sub-menu
+         DefaultListModel<String> l5 = new DefaultListModel<>();  
+          l5.addElement("Brownies");  
+          l5.addElement("Special chocolate cake");  
+          l5.addElement("Carrot cake");  
+          l5.addElement("milkshakes");  
+          JList<String> list5 = new JList<>(l5);  
+          list5.setBounds(100,100, 75,75);  
+          submenu.add(list5);
+          submenu.setSize(400, 400);
+          submenu.setLayout(null);
+          submenu.setVisible(true);
+          filemenu.add(submenu);
         
         
         
