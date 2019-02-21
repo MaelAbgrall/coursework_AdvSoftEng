@@ -2,11 +2,8 @@ package Model;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 
 /**
  * @author Ahmed ALJeferi
@@ -29,16 +26,6 @@ public class OrderList {
 		
 		return allData.get(day);				
 	}
-	public void saveWorkDay (OrderProcessing ordProcessing ,String storePath) throws IOException{
-		SimpleDateFormat formatter =new SimpleDateFormat("dd-MM-yyyy");
-		
-		String fielName = formatter.format(LocalDateTime.now())+".csv";
-		FileWriter fw = new FileWriter(fielName);
-		fw.write(ordProcessing.loadDayWork());
-		fw.close();	
-		
-	}
-	
 	//the controller need to load the menu and pass the menu object to the method 
 	//load all the history files in the directory
 	public void loadDataHistory (String path , MenuItems menu) throws ParseException, FileNotFoundException{ 
