@@ -14,7 +14,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 public class MenuItems {
-	public Set<Item> menuitem = new TreeSet<Item>();
+	Set<Item> menuitem = new TreeSet<Item>();
 	
 		//////this part for test pourpose only as it contain main and change things to static 
   /*   public static void main(String[] args) throws IOException {
