@@ -1,4 +1,4 @@
-package Model;
+package Models;
 
 /**
  * @author ALI AHMAD A ALASMARE 
