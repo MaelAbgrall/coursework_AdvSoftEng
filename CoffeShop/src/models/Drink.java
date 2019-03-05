@@ -1,4 +1,4 @@
-package Model;
+package models;
 
 /**
  * @author Ahmed ALJeferi
@@ -6,34 +6,34 @@ package Model;
  */
 
 public class Drink extends Item {
-	
-	public boolean alcohoic = false;
 
-	public Drink(String id , String name , Double price , String discrioption) {
-        this.name = name ;
-        this.id = id ;
+    public boolean alcohoic = false;
+
+    public Drink(String id, String name, Double price, String discrioption) {
+        this.name = name;
+        this.id = id;
         this.price = price;
         this.discription = discrioption;
-		MENUCOUNTER.add(id);
-		
-        }
-        public Drink (String name){
-        this.name = name ;
-        this.createID();
-        }
+        MENUCOUNTER.add(id);
+    }
 
-	@Override
-	public String createID() {
+    public Drink(String name) {
+        this.name = name;
+        this.createID();
+    }
+
+    @Override
+    public String createID() {
         int rdnm = MENUCOUNTER.size();
-        this.id  = "DR" + rdnm;
+        this.id = "DR" + rdnm;
         MENUCOUNTER.add(this.id);
         return this.id;
-	}
-	@Override
-	public String getLine() {
-		String line = this.id+","+this.name+","+this.price+","+this.discription+","+this.alcohoic;
-		return line;
-	}
-	
+    }
+
+    @Override
+    public String getLine() {
+        String line = this.id + "," + this.name + "," + this.price + "," + this.discription + "," + this.alcohoic;
+        return line;
+    }
 
 }
