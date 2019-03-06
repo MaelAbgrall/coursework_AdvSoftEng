@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - modelsTest",
+            "request": "launch",
+            "mainClass": "tests.modelsTest",
+            "projectName": "CoffeShop"
+        }
+    ]
+}

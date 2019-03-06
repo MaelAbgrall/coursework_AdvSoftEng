@@ -17,7 +17,7 @@ public class TestingRun {
 
         // Testing read the directory
         MenuItems menu = new MenuItems();
-        menu.loadfromCSV("/home/msc/aaa50/Desktop/Github/coursework_AdvSoftEng/CoffeShop/Menue.csv");
+        menu.loadFromCSV("/home/msc/aaa50/Desktop/Github/coursework_AdvSoftEng/CoffeShop/Menue.csv");
 
         OrderList ol = new OrderList();
         ol.loadDataHistory("/home/msc/aaa50/Desktop/Github/coursework_AdvSoftEng/CoffeShop/Data", menu);

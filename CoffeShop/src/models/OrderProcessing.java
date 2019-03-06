@@ -24,7 +24,7 @@ public class OrderProcessing {
         this.underProcssOrdr.add(order);
     }
 
-    public void completOrder(Order order) {
+    public void completeOrder(Order order) {
         this.procssedOrdr.add(this.underProcssOrdr.remove(this.underProcssOrdr.indexOf(order)));
         order.setPreperedFlag(true);
 
@@ -62,7 +62,7 @@ public class OrderProcessing {
         for (Order order : this.procssedOrdr) { // Loop in array of orders
             if (order.id == record[3]) { // if order are in the list
                 flag = true;
-                Item item = this.menuItems.getItmeByID(record[0]); // get the order object
+                Item item = this.menuItems.getItemByID(record[0]); // get the order object
                 if (order.items.containsKey(item)) { // check if the item in the item list in the order
                     Integer count = order.items.get(item);
                     count++; // Increment the number of the item in the list
@@ -81,7 +81,7 @@ public class OrderProcessing {
             SimpleDateFormat formatter6 = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
             Date d = formatter6.parse(record[1]);
             ordr.setDate(d);
-            Item item = this.menuItems.getItmeByID(record[0]);
+            Item item = this.menuItems.getItemByID(record[0]);
             ordr.addItem(item, 1);
             this.procssedOrdr.add(ordr);
 

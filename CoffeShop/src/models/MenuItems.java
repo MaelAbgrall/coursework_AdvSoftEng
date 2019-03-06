@@ -59,48 +59,71 @@ public class MenuItems {
 
     }
 
-    public void loadfromCSV(String fileName) throws FileNotFoundException {
+    /**
+     * Load a csv file with the menu and create Item objects (Food, Drink, Dessert)
+     * 
+     * Attributes: filename String
+     */
+    public void loadFromCSV(String fileName) throws FileNotFoundException {
         File file = new File(fileName);
         Scanner scan = new Scanner(file);
 
+        // read the file
         while (scan.hasNextLine()) {
             String line = scan.nextLine();
 
+            // parsing each line in substrings using ","
             String[] result = line.split(",");
             String type = result[0].substring(0, 2);
             Item temp;
 
+            // depending on the item type, create a Drink, Dessert or Food object
             switch (type) {
             case "DR":
+                // default initialisation at false, if product is alcohol, set to true
+                boolean alcohol = false;
+                if (result[4] == "true") {
+                    alcohol = true;
+                }
+                // call constructor
+                temp = new Drink(result[0], result[1], Double.valueOf(result[2]), result[3], alcohol);
+                
+                /*
+                // since Drinks inherit Item, you don't need to create a Drink tempD
                 Drink tempD = new Drink(result[0], result[1], Double.valueOf(result[2]), result[3]);
+                
+                // it's more clear to set all variables during construction, 
+                //  especially if we already know that it's an alcoholic beverage
                 if (result[4] == "true") {
                     tempD.alcohoic = true;
                 }
-                this.menuitem.add(tempD);
+                */
+                this.menuitem.add(temp);
                 break;
+            
             case "DS":
                 temp = new Dessert(result[0], result[1], Double.valueOf(result[2]), result[3]);
                 this.menuitem.add(temp);
-
                 break;
+
             case "FD":
                 temp = new Food(result[0], result[1], Double.valueOf(result[2]), result[3]);
                 this.menuitem.add(temp);
-
                 break;
             }
 
         }
+
+
         for (Item x : this.menuitem) {
             System.out.println(x.getLine());
         }
 
-        //closing the file
+        // closing the file
         scan.close();
     }
 
-
-    public void SaveToCSV(String fileName, Set<Item> set) throws IOException {
+    public void saveToCSV(String fileName, Set<Item> set) throws IOException {
         Iterator<Item> itr = set.iterator();
         FileWriter fw = new FileWriter(fileName);
         while (itr.hasNext()) {
@@ -111,9 +134,8 @@ public class MenuItems {
         fw.close();
     }
 
-
-    public Item getItmeByID(String id) {
-        Boolean flag = false;
+    public Item getItemByID(String id) {
+        //Boolean flag = false;
         Item i = null;
         for (Item itm : this.menuitem) {
             if (itm.id.equals(id)) {

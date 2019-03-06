@@ -1,6 +1,6 @@
 package controllers;
 
-public class controller {
+public class Controller {
     public float discountPercentage;
 
     /**
@@ -35,9 +35,9 @@ public class controller {
      * Constructor. Start the controller, bind the model and call the readcsv
      * function
      */
-    controller() {
+    /*controller() {
 
-    }
+    }*/
 
     /**
      * called when the program exits. delete all model objects, call the saveToCSV
