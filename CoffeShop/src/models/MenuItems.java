@@ -114,7 +114,7 @@ public class MenuItems {
 
         }
 
-
+        //TODO move to test
         for (Item x : this.menuitem) {
             System.out.println(x.getLine());
         }
@@ -123,6 +123,11 @@ public class MenuItems {
         scan.close();
     }
 
+    /**
+     * Save our items to a CSV file
+     * 
+     * Attributes: fileName String, set (of items) Set<Item>
+     */
     public void saveToCSV(String fileName, Set<Item> set) throws IOException {
         Iterator<Item> itr = set.iterator();
         FileWriter fw = new FileWriter(fileName);

@@ -22,14 +22,13 @@ public class OrderList {
     TreeMap<Date, OrderProcessing> allData = new TreeMap<Date, OrderProcessing>();
 
     public OrderList() {
-        // TODO Auto-generated constructor stub
     }
 
     public OrderProcessing getDayOrders(Date day) {
-
         return allData.get(day);
     }
 
+    
     public void saveWorkDay(OrderProcessing ordProcessing, String storePath) throws IOException {
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 
