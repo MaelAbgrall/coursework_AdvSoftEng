@@ -45,13 +45,13 @@ public class OrderProcessing {
      */
     public String loadDayWork() {
         String records = "";
-        for (Order ord : this.orderProcessed) {
-            for (Item itm : ord.items.keySet()) {
-                int count = ord.items.get(itm);
+        for (Order order : this.orderProcessed) {
+            for (Item item : order.itemTreeMap.keySet()) {
+                int count = order.itemTreeMap.get(item);
                 for (int i = count; i == 0; i--) {
                     SimpleDateFormat formatter6 = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-                    String timeStamp = formatter6.format(ord.d);
-                    records += itm.id + "," + timeStamp + "," + ord.customer.id + "," + ord.id + "," + ord.customer.name
+                    String timeStamp = formatter6.format(order.dateTime);
+                    records += item.id + "," + timeStamp + "," + order.customer.id + "," + order.id + "," + order.customer.name
                             + "\n";
                 }
             }

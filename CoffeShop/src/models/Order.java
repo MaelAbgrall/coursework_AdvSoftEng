@@ -22,8 +22,9 @@ public class Order {
     private Boolean preparedFlag = false;
     private Double totalCost;
 
+    //TODO: never used 
     /*
-     * //TODO: never used public Order() { d.setTime(System.currentTimeMillis()); }
+     * public Order() { d.setTime(System.currentTimeMillis()); }
      */
 
     /**

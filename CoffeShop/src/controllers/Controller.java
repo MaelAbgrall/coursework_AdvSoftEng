@@ -1,7 +1,65 @@
 package controllers;
 
+import java.io.FileNotFoundException;
+import java.text.ParseException;
+
+import models.MenuItems;
+import models.OrderList;
+
 public class Controller {
     public float discountPercentage;
+    private MenuItems menu;
+    private OrderList orderList;
+
+    /**
+     * open a csv file specified by path and populate the model classes with it,
+     * then save the object in the controller
+     */
+    public void loadMenu(String path) {
+        MenuItems newMenu = new MenuItems();
+        try {
+            newMenu.loadFromCSV(path);
+            menu = newMenu;
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * load orders, then save the object in the controller
+     */
+    public void loadOrders(String path) {
+        OrderList newOrderList = new OrderList();
+        if (menu != null) {
+            try {
+                newOrderList.loadDataHistory(path, menu);
+                orderList = newOrderList;
+            } catch (FileNotFoundException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (ParseException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("no menu are present, load a menu before calling loadOrders");
+        }
+    }
+
+    /**
+     * return the menu
+     */
+    public MenuItems getMenu(){
+        return menu;
+    }
+
+    /**
+     * return the order list
+     */
+    public OrderList getOrderList(){
+        return orderList;
+    }
 
     /**
      * check if a discount can be applied if yes, the variable discountPercentage is
@@ -35,9 +93,11 @@ public class Controller {
      * Constructor. Start the controller, bind the model and call the readcsv
      * function
      */
-    /*controller() {
-
-    }*/
+    /*
+     * controller() {
+     * 
+     * }
+     */
 
     /**
      * called when the program exits. delete all model objects, call the saveToCSV
