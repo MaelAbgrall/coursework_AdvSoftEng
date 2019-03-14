@@ -45,8 +45,6 @@ public class Drink extends Item {
     protected void createID() {
         this.id = "DR" + MENUCOUNTER.size();
     }
-    
-    //Return the information of an item in line comma separated value to be used in store in file
 
     @Override
     public String getLine() {

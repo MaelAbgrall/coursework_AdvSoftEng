@@ -89,7 +89,6 @@ public class MenuItems {
      * Attributes: fileName String, set (of items) Set<Item>
      */
     public void saveToCSV(String fileName, Set<Item> set) throws IOException {
-
         Iterator<Item> itr = set.iterator();
         FileWriter fw = new FileWriter(fileName);
         while (itr.hasNext()) {
@@ -100,7 +99,6 @@ public class MenuItems {
         fw.close();
     }
 
-    
     public Item getItemByID(String id) {
         //Boolean flag = false;
         Item i = null;

@@ -21,12 +21,10 @@ public abstract class Item implements Comparable<Item> {
     protected Double price;
     protected String description;
     protected String id;
-    
-    //An abstract method that need to be declared in each child class to have different type of id based on the 
-    //type of the object to be easy in load data from file.
+
     protected abstract void createID();
 
-    //and abstract method to return the information of an item in line comma separated value to be used in store in file 
+    //TODO: purpose?
     public abstract String getLine();
 
     /**
@@ -91,12 +89,11 @@ public abstract class Item implements Comparable<Item> {
     public String getId(){
         return this.id;
     }
-    //In stage two we decide not to use tree in Menu Class so compareTo method in this class doesn't need any more
-/*
+
     @Override
     public int compareTo(Item i) {
         // TODO Auto-generated method stub
         return this.id.compareTo(i.id);
-    }*/
+    }
 
 }
