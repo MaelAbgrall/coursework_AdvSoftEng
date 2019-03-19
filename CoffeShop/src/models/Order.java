@@ -13,16 +13,30 @@ public class Order {
 
     private LinkedList<Item> itemList;
     private String id;
-    private Date dateTime;
+    private Date time;
     private Double totalCost;
     private Boolean discount;
+    private String customer;
 
-    private Customer customer;
-
-    public Order(String id, Customer customer, Date dateTime) {
+    public Order(String id, String customer, Date time) {
         this.setItemList(new LinkedList<>());
-        this.dateTime = dateTime;
+        this.time = time;
         this.id = id;
+        this.setCustomer(customer);
+    }
+
+    /**
+     * @return the customer
+     */
+    public String getCustomer() {
+        return customer;
+    }
+
+    /**
+     * @param customer the customer to set
+     */
+    public void setCustomer(String customer) {
+        this.customer = customer;
     }
 
     /**
@@ -58,20 +72,6 @@ public class Order {
     }
 
     /**
-     * @return the customer
-     */
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    /**
-     * @param customer the customer to set
-     */
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    /**
      * @return the discount
      */
     public Boolean getDiscount() {
@@ -102,15 +102,15 @@ public class Order {
     /**
      * @return the dateTime
      */
-    public Date getDateTime() {
-        return dateTime;
+    public Date getTime() {
+        return time;
     }
 
     /**
      * @param dateTime the dateTime to set
      */
-    public void setDateTime(Date dateTime) {
-        this.dateTime = dateTime;
+    public void setTime(Date dateTime) {
+        this.time = dateTime;
     }
 
     

@@ -1,5 +1,6 @@
 package controllers;
 
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Queue;
 
@@ -11,30 +12,42 @@ import controllers.FileHandler;
 public class Controller {
 
     FileHandler fileHandler;
-    //View view;    
+    // View view;
 
-    HashMap<Item, String> Menu;
+    HashMap<String, Item> menu;
     Queue<Order> waitingOrderQueue;
     Queue<Order> pendingOrderQueue;
     Queue<Order> completedOrderQueue;
     String logPath;
 
-    public Controller(){
-        //TODO: implement constructor
+    public Controller() {
+        // TODO: implement constructor
         this.fileHandler = new FileHandler();
     }
 
     /**
      * Load the menu and order files (CSV)
-     * @param menuPath the path to the menu
+     * 
+     * @param menuPath  the path to the menu
      * @param orderPath the path to the order file
      */
-    public void load(String menuPath, String orderPath){
-        this.Menu = fileHandler.loadMenu(menuPath);
-        System.out.println("Menu loaded");
+    public void load(String menuPath, String orderPath) {
+        try {
+            this.menu = fileHandler.loadMenu(menuPath);
+            System.out.println("Menu loaded");
+        } catch (FileNotFoundException e) {
+            System.err.println("file not found");
+            e.printStackTrace();
+        }
 
-        this.waitingOrderQueue = fileHandler.loadOrders(orderPath);
-        System.out.println("Waiting Queue loaded");
+        try {
+            this.waitingOrderQueue = fileHandler.loadOrders(orderPath, this.menu);
+            System.out.println("Waiting Queue loaded");
+        } catch (FileNotFoundException e) {
+            System.err.println("file not found");
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     public void exit(){
