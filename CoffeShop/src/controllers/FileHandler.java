@@ -3,6 +3,7 @@ package controllers;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 import java.io.File;
@@ -57,7 +58,7 @@ public class FileHandler {
                 }
             }
 
-            // retrieve the item oject and add it to the order
+            // retrieve the item oject and add it to the order            
             Item item = menu.get(result[2]);
             order.addItem(item);
             // calculate total and discount
@@ -82,9 +83,12 @@ public class FileHandler {
      * @return double total
      */
     public Double calculateTotal(Order order) {
-        Double total = null;
+        Double total = 0.;
+        List<Item> itemList = order.getItemList();
+        for (Item item: itemList){
+        	total += item.getPrice();
+        }
 
-        // TODO: implement calculateTotal
         return total;
     }
 

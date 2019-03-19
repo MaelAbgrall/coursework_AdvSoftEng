@@ -2,10 +2,8 @@ package tests;
 
 import java.io.FileNotFoundException;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Queue;
-import java.util.Map.Entry;
 
 import controllers.FileHandler;
 
@@ -41,12 +39,19 @@ public class fileHandlerTest {
 
         try {
             HashMap<String, Item> testMenu = fileHandler.loadMenu(menuPath);
+            
+            for (Map.Entry<String, Item> entry : testMenu.entrySet()) {
+                System.out.println("Key : " + entry.getKey() + " Value : " + entry.getValue());
+            }
 
+            System.out.println("loadMenu done \n\n\n");
             Queue<Order> testQueue = fileHandler.loadOrders(orderPath, testMenu);
             for(Order order: testQueue){
                 System.out.println(order);
+                System.out.println("total: " + order.getTotalCost());
+                System.out.println("discount: " + order.getDiscount());
             }
-
+            System.out.println("loadOrder done");
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
