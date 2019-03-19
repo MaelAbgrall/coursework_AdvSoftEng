@@ -60,10 +60,14 @@ public class FileHandler {
 
             // retrieve the item oject and add it to the order            
             Item item = menu.get(result[2]);
-            order.addItem(item);
-            // calculate total and discount
-            order.setTotalCost(calculateTotal(order));
-            order.setDiscount(calculateDiscount(order));
+            if(item != null){
+                order.addItem(item);
+                // calculate total and discount
+                order.setTotalCost(calculateTotal(order));
+                order.setDiscount(calculateDiscount(order));
+            } else {
+                System.err.println("ERROR with " + result[2]);
+            }
         }
 
         // add now all element from the hashmap to the Queue
@@ -85,8 +89,8 @@ public class FileHandler {
     public Double calculateTotal(Order order) {
         Double total = 0.;
         List<Item> itemList = order.getItemList();
-        for (Item item: itemList){
-        	total += item.getPrice();
+        for (Item item : itemList) {
+            total += item.getPrice();
         }
 
         return total;
@@ -175,12 +179,6 @@ public class FileHandler {
             }
 
         }
-
-        // TODO move to test
-        /*
-         * for (Item x : loadedMenu){ //getline == nom + desc + prix etc
-         * //System.out.println(x.getLine()); }
-         */
 
         // closing the file
         scan.close();

@@ -1,4 +1,15 @@
-DR124,Martinee,3.5,secruit drink,true
-DS126,Brownire,2.5,Special chocolate cake
-FD123,Cheese Sandwhich,5.2,Toast with two type of cheese
-FD124,burger Sandwhich,7.2,cheese burger
+DR001,Martini,3.5,secruit drink,true
+DR002,Water,0.5,tap water,false
+DR003,Orange juice,2.0,fresh oranges,false
+DR004,Soda,2.6,sparkcling!,false
+DR005,Beer,0.2,because it's better than water,true
+DS006,Brownie,2.5,Special chocolate cake
+DS007,Panna cotta,2.5,Italian favorite
+DS008,Cheesecake,3.0,strait from the US
+DS009,Fruit,2.0,Eat at least 5 veggies per day !
+DS010,Ice cream,3.0,sweeeet
+FD011,Cheese Sandwhich,5.2,Toast with two type of cheese
+FD012,Burger,7.2,Hambuger classic
+FD013,Fries,1.5,fried in peanut oil !
+FD014,Salad,4.5,we don't forget turtles
+FD015,Bread,6.4,for french people

@@ -45,13 +45,12 @@ public class Controller {
             System.out.println("Waiting Queue loaded");
         } catch (FileNotFoundException e) {
             System.err.println("file not found");
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
 
-    public void exit(){
-        //TODO: implement exit
+    public void exit() {
+        // TODO: implement exit
     }
 
     /**
@@ -64,16 +63,15 @@ public class Controller {
     /**
      * get the waitingOrderQueue
      */
-    public Queue<Order> getWaiting(){
+    public Queue<Order> getWaiting() {
         return waitingOrderQueue;
     }
 
     /**
      * get the completedOrderQueue
      */
-    public Queue<Order> getCompleted(){
+    public Queue<Order> getCompleted() {
         return completedOrderQueue;
     }
-    
-    
+
 }

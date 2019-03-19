@@ -1,8 +1,8 @@
 package tests;
 
 //Item and subclasses
-import models.item.Item;
-import models.item.Food;
+//import models.item.Item;
+//import models.item.Food;
 //import models.Dessert;
 //import models.Drink;
 
