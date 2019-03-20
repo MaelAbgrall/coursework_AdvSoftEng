@@ -1,8 +1,8 @@
 package tests;
 
 //Item and subclasses
-import models.Item;
-import models.Food;
+//import models.item.Item;
+//import models.item.Food;
 //import models.Dessert;
 //import models.Drink;
 
@@ -13,9 +13,9 @@ import models.Food;
 public class modelsTest {
 
     public static void main(String[] args) {
-        testFood();
+        //testFood();
     }
-
+/*
     public static void testFood() {
         String name = "testfood";
         Double price = 3.;
@@ -29,5 +29,5 @@ public class modelsTest {
         System.out.println("name: " + testItem.getName());
         System.out.println("desc: " + testItem.getDescription());
         System.out.println("price: " + testItem.getPrice());
-    }
+    }*/
 }

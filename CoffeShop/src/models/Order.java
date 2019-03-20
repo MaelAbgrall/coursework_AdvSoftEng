@@ -1,85 +1,92 @@
 package models;
 
 import java.util.Date;
-import java.util.TreeMap;
+import java.util.LinkedList;
+
+import models.item.Item;
+
 
 /**
- * @author ALI AHMAD A ALASMARE
- * 
- *
- *         Create a new order
- * @param id       String
- * @param customer Customer object
- * @param dateTime Date
- *
+ * Order
  */
-
 public class Order {
-    String id;
-    Date dateTime = new Date();
-    Customer customer;
-    TreeMap<Item, Integer> itemTreeMap;
-    private Boolean preparedFlag = false;
+
+    private LinkedList<Item> itemList;
+    private String id;
+    private Date time;
     private Double totalCost;
+    private Boolean discount;
+    private String customer;
 
-    //TODO: never used 
-    /*
-     * public Order() { d.setTime(System.currentTimeMillis()); }
-     */
-
-    /**
-     * Create a new order
-     * 
-     * @param id       String
-     * @param customer Customer object
-     * @param dateTime Date
-     */
-    public Order(String id, Customer customer, Date dateTime) {
+    public Order(String id, String customer, Date time) {
+        this.setItemList(new LinkedList<>());
+        this.time = time;
         this.id = id;
+        this.setCustomer(customer);
+    }
+
+    /**
+     * @return the customer
+     */
+    public String getCustomer() {
+        return customer;
+    }
+
+    /**
+     * @param customer the customer to set
+     */
+    public void setCustomer(String customer) {
         this.customer = customer;
-        this.dateTime = dateTime;
     }
 
     /**
-     * Set the date
-     * 
-     * @param dateTime date and time of the order (Date)
+     * @return the itemList
      */
-    public void setDate(Date dateTime) {
-        this.dateTime = dateTime;
+    public LinkedList<Item> getItemList() {
+        return itemList;
     }
 
     /**
-     * add an Item to the order. 
-     * Careful this does not check if the item already exist
-     * 
-     * @param item  Item
-     * @param count number of items (int)
+     * @param itemList the itemList to set
      */
-    public void addItem(Item item, int count) {
-        itemTreeMap.put(item, count);
+    public void setItemList(LinkedList<Item> itemList) {
+        this.itemList = itemList;
+    }
+
+    public void addItem(Item item){
+        this.itemList.add(item);
     }
 
     /**
-     * Get the prepared flag
-     * 
-     * @return preparedFlag Boolean
+     * @return the id
      */
-    public Boolean getPreparedFlag() {
-        return preparedFlag;
+    public String getId() {
+        return id;
     }
 
     /**
-     * set the flag for prepared
-     * 
-     * @param preparedFlag boolean
+     * @param id the id to set
      */
-    public void setPreparedFlag(Boolean preparedFlag) {
-        this.preparedFlag = preparedFlag;
+    public void setId(String id) {
+        this.id = id;
     }
 
     /**
-     * @return the totalCost of the order
+     * @return the discount
+     */
+    public Boolean getDiscount() {
+        return discount;
+    }
+
+    /**
+     * @param discount the discount to set
+     */
+    public void setDiscount(Boolean discount) {
+        this.discount = discount;
+    }
+
+    /**
+     * @return the totalCost
      */
     public Double getTotalCost() {
         return totalCost;
@@ -92,4 +99,19 @@ public class Order {
         this.totalCost = totalCost;
     }
 
+    /**
+     * @return the dateTime
+     */
+    public Date getTime() {
+        return time;
+    }
+
+    /**
+     * @param dateTime the dateTime to set
+     */
+    public void setTime(Date dateTime) {
+        this.time = dateTime;
+    }
+
+    
 }

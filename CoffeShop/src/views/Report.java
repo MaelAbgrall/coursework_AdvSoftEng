@@ -39,6 +39,10 @@ public class Report extends JFrame {
         table = new JTable(data, columnNames);
         table.setPreferredScrollableViewportSize(new Dimension(500, 70));
         table.setFillsViewportHeight(true);
+        
+        tModel = new CLS_Controller2();
+        table.setModel(tModel);
+
 
         JScrollPane scrollPane = new JScrollPane(table);
         add(scrollPane);
@@ -63,5 +67,9 @@ public class Report extends JFrame {
     public void setTotalRevenue(int revenue) {
         totalRevenue.setText(Integer.toString(revenue));
     }
+    /* TO TEST RUN THIS
+  public static void main(String args[]) { 
+		CoffeeShopReport EndOfDayReport = new CoffeeShopReport(); */
+		
 
 }
