@@ -1,234 +1,252 @@
-package views;
+package CoffeShop.src.views;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.awt.event.KeyEvent;
-//import java.io.FileNotFoundException;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
 
-import javax.swing.DefaultListModel;
-//import javax.swing.JButton;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JFrame;
-//import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.KeyStroke;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
+import javax.swing.border.Border;
+import javax.swing.border.TitledBorder;
 
-/*
-import models.Item;
-import models.Drink;
-import models.MenuItems;
-*/
+import CoffeShop.src.models.item.*;
+import CoffeShop.src.controllers.*;
+import CoffeShop.Data.*;
 
-/**
- * 
- * @author stellahchonzi
- *
- */
+public class MenuGUI extends JFrame {
 
-public class MenuGUI implements ActionListener, ItemListener {
+    private BigDecimal totalCost;
+    private FileHandler menuRead;
+    private JPanel receipt;
+    private JPanel centerPanel;
+    private JTextField orderPrice;
+    private LinkedList<Item> Order;
+    private JTextPane orderItems;
+    private String itemInformation;
 
-    public JMenuBar createMenuBar() {
-        // create a menu-bar
-        JMenuBar menuBar;
-        JMenu filemenu, submenu, editmenu;
-        JMenu editsubmenu;
-        JMenuItem menuItem;
+    public MenuGUI(File loadmenu) throws FileNotFoundException {
+        /**
+         * Initializing IVs
+         */
+        totalCost = new BigDecimal(0);
+        itemInformation = "";
 
-        // Create the menu bar.
-        menuBar = new JMenuBar();
+        Order = new LinkedList<Item>();
+        menuRead = new FileHandler(loadmenu);
+        menuRead.readInputFile();
+        create();
 
-        // Build the items menu.
-        filemenu = new JMenu("Items");
-        filemenu.setMnemonic(KeyEvent.VK_F);
-        filemenu.getAccessibleContext().setAccessibleDescription("Cafe items.");
-        menuBar.add(filemenu);
+        setSize(1500, 1500);
+        setTitle("Restaurant Menu System");
+        setBackground(Color.WHITE);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setVisible(true);
 
-        // menu items, drinks section
-        menuItem = new JMenuItem("Drinks", KeyEvent.VK_0);
-        menuItem.getAccessibleContext().setAccessibleDescription("");
-        menuItem.addActionListener(this);
-        filemenu.add(menuItem);
-
-        // a sub-menu for the drinks section, for selection
-
-        submenu = new JMenu("Drinks submenu");
-        submenu.setMnemonic(KeyEvent.VK_1);
-
-        menuItem = new JMenuItem("Hot Drinks");
-        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_2, ActionEvent.ALT_MASK));
-        submenu.add(menuItem);
-
-        // adding individual items to the sub-menu
-        DefaultListModel<String> l1 = new DefaultListModel<>();
-
-        l1.addElement("Cappuccino");
-        l1.addElement("Hot Chocolate");
-        l1.addElement("Latte");
-        l1.addElement("Americano");
-        JList<String> list = new JList<>(l1);
-        list.setBounds(100, 100, 75, 75);
-        submenu.add(list);
-        submenu.setSize(400, 400);
-        submenu.setLayout(null);
-        submenu.setVisible(true);
-
-        menuItem = new JMenuItem("Cold drinks");
-        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_3, ActionEvent.ALT_MASK));
-        submenu.add(menuItem);
-
-        // adding individual items to the sub-menu
-        DefaultListModel<String> l2 = new DefaultListModel<>();
-        l2.addElement("Pepsi");
-        l2.addElement("Coke");
-        l2.addElement("Spring Water");
-        l2.addElement("Fruit Juice");
-        JList<String> list2 = new JList<>(l2);
-        list2.setBounds(100, 100, 75, 75);
-        submenu.add(list2);
-        submenu.setSize(400, 400);
-        submenu.setLayout(null);
-        submenu.setVisible(true);
-        filemenu.add(submenu);
-
-        // menu items, food section
-        filemenu.addSeparator();
-        menuItem = new JMenuItem("Food", KeyEvent.VK_1);
-        menuItem.getAccessibleContext().setAccessibleDescription("");
-        menuItem.addActionListener(this);
-        filemenu.add(menuItem);
-
-        // a sub-menu for the food section, available for selection
-
-        submenu = new JMenu("Food submenu");
-        submenu.setMnemonic(KeyEvent.VK_3);
-
-        menuItem = new JMenuItem("Hot Food");
-        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_3, ActionEvent.ALT_MASK));
-        submenu.add(menuItem);
-
-        // adding individual items to the sub-menu
-        DefaultListModel<String> l3 = new DefaultListModel<>();
-        l3.addElement("burger sandwich");
-        l3.addElement("Jacket Potato");
-        l3.addElement("Soup");
-        l3.addElement("sausage roll");
-        JList<String> list3 = new JList<>(l3);
-        list3.setBounds(100, 100, 75, 75);
-        submenu.add(list3);
-        submenu.setSize(400, 400);
-        submenu.setLayout(null);
-        submenu.setVisible(true);
-        filemenu.add(submenu);
-
-        menuItem = new JMenuItem("Cold food");
-        submenu.add(menuItem);
-        filemenu.add(submenu);
-
-        // adding individual items to the sub-menu
-        DefaultListModel<String> l4 = new DefaultListModel<>();
-        l4.addElement("cheese sandwich");
-        l4.addElement("chicken cesear");
-        l4.addElement("salad");
-        l4.addElement("ham sandwich");
-        JList<String> list4 = new JList<>(l4);
-        list4.setBounds(100, 100, 75, 75);
-        submenu.add(list4);
-        submenu.setSize(400, 400);
-        submenu.setLayout(null);
-        submenu.setVisible(true);
-        filemenu.add(submenu);
-
-        // menu items, dessert section
-        filemenu.addSeparator();
-        menuItem = new JMenuItem("Dessert", KeyEvent.VK_4);
-        menuItem.getAccessibleContext().setAccessibleDescription("");
-        menuItem.addActionListener(this);
-        filemenu.add(menuItem);
-
-        // a sub-menu for dessert section
-        submenu = new JMenu("Dessert submenu");
-        submenu.setMnemonic(KeyEvent.VK_4);
-
-        menuItem = new JMenuItem("Dessert submenu");
-        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_4, ActionEvent.ALT_MASK));
-        submenu.add(menuItem);
-
-        menuItem = new JMenuItem("Available desserts");
-        submenu.add(menuItem);
-        filemenu.add(submenu);
-
-        // adding individual items to the sub-menu
-        DefaultListModel<String> l5 = new DefaultListModel<>();
-        l5.addElement("Brownies");
-        l5.addElement("Special chocolate cake");
-        l5.addElement("Carrot cake");
-        l5.addElement("milkshakes");
-        JList<String> list5 = new JList<>(l5);
-        list5.setBounds(100, 100, 75, 75);
-        submenu.add(list5);
-        submenu.setSize(400, 400);
-        submenu.setLayout(null);
-        submenu.setVisible(true);
-        filemenu.add(submenu);
-
-        // edit menu in the menu bar to add or remove available stock
-        editmenu = new JMenu(" Edit Available products");
-        editmenu.setMnemonic(KeyEvent.VK_5);
-        editmenu.getAccessibleContext().setAccessibleDescription("edit menu.");
-        menuBar.add(editmenu);
-
-        // menu items
-        menuItem = new JMenuItem("Remove products", KeyEvent.VK_U);
-        menuItem.getAccessibleContext().setAccessibleDescription("");
-        menuItem.addActionListener(this);
-        editmenu.add(menuItem);
-
-        menuItem = new JMenuItem("Add products", KeyEvent.VK_R);
-        menuItem.getAccessibleContext().setAccessibleDescription("");
-        menuItem.addActionListener(this);
-        editmenu.add(menuItem);
-
-        return menuBar;
     }
 
-    private static void createAndShowGUI() {
+    /**
+     * We use a border layout here We split the pane horizontally with the ordered
+     * items on the right and item buttons to the left We get the panels for the
+     * frame and put it in the divided pane
+     */
+    public void create() {
+        JPanel mainPanel = (JPanel) getContentPane();
+        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, getItemButtons(), getReceipt());
 
-        JFrame frame = new JFrame("A Coffee Shop Menu");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        MenuGUI menu = new MenuGUI();
-        frame.setJMenuBar(menu.createMenuBar());
+        splitPane.setDividerLocation(780);
+        mainPanel.setLayout(new BorderLayout());
+        mainPanel.add(splitPane, BorderLayout.CENTER);
 
-        /* show frame */
-        frame.pack();
-        frame.setSize(400, 300);
-        frame.setVisible(true);
     }
 
-    public static void main(String[] args) {
+    /**
+     * An important method that allows for scrolling. This is crucial for long menus
+     * that wont fit on the same screen The button panel is created in a standard
+     * grid layout and eventually returns a scroll pane with all buttons
+     * 
+     * @return
+     */
+    private JScrollPane getItemButtons() {
+        JPanel pan = new JPanel();
+        pan.setLayout(new GridLayout(0, 2));
 
-        javax.swing.SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                createAndShowGUI();
+        LinkedList<Item> itemButtons = menuRead.getItem();
+        /**
+         * making a button for each item Adding action listeners so that they can
+         * respond to clicks Refresh panel is a private method that updates the right
+         * panel to reflect the current status of the order
+         */
+        for (final Item itemButton : itemButtons) {
+
+            final JButton createButton = new JButton(itemButton.getName());
+            createButton.setToolTipText(itemButton.getName());
+
+            createButton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent arg0) {
+                    refreshPanel(itemButton);
+                }
+            });
+            pan.add(createButton);
+            createButton.setPreferredSize(new Dimension(30, 60));
+
+        }
+        /**
+         * Specifying the border specification and add a scroll pane to the main button
+         * panel Specifying the nature of the border Returning scroller since we have
+         * implemented a scrollable panel
+         */
+        JScrollPane scroller = new JScrollPane(pan);
+        Border etchedBorder = BorderFactory.createEtchedBorder();
+        Border border = BorderFactory.createTitledBorder(etchedBorder, "Items", TitledBorder.DEFAULT_JUSTIFICATION,
+                TitledBorder.DEFAULT_POSITION, new Font("Lucida", Font.BOLD, 20), Color.BLACK);
+        pan.setBorder(border);
+        return scroller;
+
+    }
+
+    /**
+     * Receipt panel deals with the current order Specify all the dimensions and
+     * colors We add a scroll pane here too incase the order is very long The
+     * textfield is constantly updated with the current price We set the
+     * textfield.setEditable to false so that it cannot be altered by the user Place
+     * order and Clear Order buttons are added here with their respective
+     * ActionListeners
+     * 
+     * @return
+     */
+    private JPanel getReceipt() {
+
+        receipt = new JPanel();
+        JLabel label = new JLabel("Customer Order:");
+        receipt.setLayout(new BorderLayout());
+
+        JPanel lowerPanel = new JPanel();
+        lowerPanel.setLayout(new BorderLayout());
+
+        receipt.add(lowerPanel, BorderLayout.SOUTH);
+        receipt.add(label, BorderLayout.NORTH);
+
+        centerPanel = new JPanel();
+        centerPanel.setLayout(new GridLayout(0, 1));
+
+        orderItems = new JTextPane();
+        centerPanel.add(orderItems);
+
+        orderItems.setEditable(false);
+
+        JScrollPane centerPanelScroller = new JScrollPane(centerPanel);
+        receipt.add(centerPanelScroller, BorderLayout.CENTER);
+
+        orderPrice = new JTextField(20);
+        orderPrice.setText("Total Cost = $0.00");
+        orderPrice.setEditable(false);
+
+        JButton placeOrder = new JButton("Place Order");
+        JButton clearOrder = new JButton("Clear Order");
+
+        placeOrder.setPreferredSize(new Dimension(30, 50));
+        clearOrder.setPreferredSize(new Dimension(30, 50));
+
+        centerPanel.setBackground(Color.LIGHT_GRAY);
+        placeOrder.setForeground(Color.BLUE);
+        clearOrder.setForeground(Color.RED);
+
+        placeOrder.setFont(new Font("Times New Roman", Font.BOLD, 40));
+        clearOrder.setFont(new Font("Times New Roman", Font.BOLD, 40));
+
+        clearOrder.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                /**
+                 * private method that clears all content
+                 */
+                delete();
+
+            }
+
+        });
+
+        placeOrder.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+
+                    if (!orderPrice.getText().equals("Total Cost = $0.00")) {
+
+                        menuRead.logOrder(Order, totalCost);
+                        JOptionPane.showMessageDialog(getContentPane(), "Order has been sent to kitchen",
+                                "Order has been logged", JOptionPane.INFORMATION_MESSAGE);
+                        delete();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "No items ordered", "Place order",
+                                JOptionPane.ERROR_MESSAGE);
+                    }
+                } catch (IOException g) {
+
+                    JOptionPane.showMessageDialog(null, "Error! Program terminated", " Error",
+                            JOptionPane.ERROR_MESSAGE);
+                }
+
             }
         });
-    }
+        /**
+         * Adding to the panel
+         */
 
-    @Override
-    public void itemStateChanged(ItemEvent e) {
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-        JMenuItem jmi = (JMenuItem) e.getSource();
-        System.out.println("menu item clicked: " + jmi.getText());
-        if (jmi.getText().equalsIgnoreCase("close")) {
-            System.exit(0);
-        }
+        lowerPanel.add(orderPrice, BorderLayout.NORTH);
+        lowerPanel.add(placeOrder, BorderLayout.CENTER);
+        lowerPanel.add(clearOrder, BorderLayout.SOUTH);
+        lowerPanel.setBackground(Color.LIGHT_GRAY);
+        receipt.setBackground(Color.WHITE);
+        return receipt;
 
     }
+
+    private void delete() {
+
+        orderPrice.setText("Total Cost = $0.00");
+        totalCost = new BigDecimal(0);
+        Order.clear();
+        itemInformation = "";
+        orderItems.setText(null);
+
+    }
+
+    /**
+     * Constantly updates the order panel based on commands
+     * 
+     * @param itemButton
+     */
+    private void refreshPanel(final Item itemButton) {
+        String item = itemButton.getName();
+        BigDecimal itemPrice = itemButton.getCost();
+        itemInformation += "\n" + item + "\n" + itemPrice + "\n";
+        orderItems.setText(itemInformation);
+        Order.add(itemButton);
+
+        totalCost = totalCost.add(itemPrice);
+        orderPrice.setText("Total cost = $" + totalCost);
+    }
+
 }
