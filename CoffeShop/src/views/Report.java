@@ -11,7 +11,6 @@ import javax.swing.*;
 public class Report extends JFrame {
 
     private JFrame frame;
-    private CLS_Controller2 tModel;
     private JLabel label;
     private JButton button;
     private JTable table;
