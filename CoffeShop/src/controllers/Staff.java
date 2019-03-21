@@ -1,6 +1,7 @@
 package controllers;
 
 import controllers.Controller;
+import models.Order;
 
 /**
  * Staff
@@ -18,15 +19,38 @@ public class Staff implements Runnable {
     }
 
     public void run() { // the thread's code
-        for (int i = 0; i < 5; i++) {
-            try {
-                Thread.sleep(this.timer);
-                //counter.increment();
-                System.out.println("plop i'm thread " + this.staffName);
-            } catch (InterruptedException e) {
-                System.out.println(e.getMessage());
+        // loop until there is no more order to process
+        Order order;
+        while(true){
+            // wait
+            this.slowDown();
+            // waiting order -> pending order
+            order = controller.processOrder(this.staffName);
+            if(order == null){
+                System.out.println("No more order for " + this.staffName);
+                break;
             }
+            System.out.println(this.staffName + " is processing order " + order.getId());
+
+            //wait
+            this.slowDown();
+            // pending order -> completed order
+            controller.completeOrder(this.staffName);
+            System.out.println(this.staffName + " completed order no " + order.getId());
+
         }
-        System.out.println("thread" + this.staffName + "is exiting");
+        System.out.println(this.staffName + " has finished working.");
+    }
+
+    /**
+     * Slow down the thread by waiting according to this.timer
+     */
+    public void slowDown() {
+        try {
+            Thread.sleep(this.timer);
+            //counter.increment();
+        } catch (InterruptedException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

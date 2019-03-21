@@ -19,7 +19,7 @@ public class Controller {
 
     HashMap<String, Item> menu;
     Queue<Order> waitingOrderQueue;
-    HashMap<Order, String> pendingOrder;
+    HashMap<String, Order> pendingOrder;
     Queue<Order> completedOrderQueue;
     String logPath;
 
@@ -94,7 +94,7 @@ public class Controller {
     /**
      * get the pendingOrderQueue
      */
-    public HashMap<Order, String> getPending() {
+    public HashMap<String, Order> getPending() {
         return pendingOrder;
     }
 
@@ -130,21 +130,31 @@ public class Controller {
         
         // or go on
         Order order = waitingOrderQueue.poll();
-        this.pendingOrder.put(order, staffName);
+        this.pendingOrder.put(staffName, order);
         return order;
     }
 
     /**
      * Move an element from pendingOrder to CompleteOrderQueue
      */
-    public synchronized void completeOrder() {
-
+    public synchronized void completeOrder(String staffName) {
+        if(this.pendingOrder.isEmpty() == true){
+            System.err.println("\n\nThis hashmap should not be accessed now. It is empty");
+        } else {
+            Order order = this.pendingOrder.get(staffName);
+            //in case something is wrong
+            if(order == null){
+                System.err.println("error: staffName " + staffName + " does not match anything in the hashmap");
+            }
+            this.pendingOrder.remove(staffName);
+            this.completedOrderQueue.add(order);
+        }
     }
 
     /**
      * Add an order to the waitingOrder Queue
      */
-    public synchronized void addOrder() {
-
+    public synchronized void addOrder(Order order) {
+        this.waitingOrderQueue.add(order);
     }
 }
