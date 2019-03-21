@@ -1,4 +1,4 @@
-package CoffeShop.src.views;
+package views;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -12,6 +12,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -28,31 +29,34 @@ import javax.swing.JTextPane;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
-import CoffeShop.src.models.item.*;
-import CoffeShop.src.controllers.*;
-import CoffeShop.Data.*;
+import models.item.*;
+import controllers.FileHandler;
+import models.item.Item;
+import controllers.*;
+
+//import CoffeShop.Data.*;
 
 public class MenuGUI extends JFrame {
 
-    private BigDecimal totalCost;
+    private Double totalCost;
     private FileHandler menuRead;
     private JPanel receipt;
     private JPanel centerPanel;
     private JTextField orderPrice;
-    private LinkedList<Item> Order;
+    private HashMap<String, Item> Order;
     private JTextPane orderItems;
     private String itemInformation;
 
-    public MenuGUI(File loadmenu) throws FileNotFoundException {
+    public MenuGUI(String filename) throws FileNotFoundException {
         /**
          * Initializing IVs
          */
-        totalCost = new BigDecimal(0);
+        totalCost = new Double(0);
         itemInformation = "";
 
-        Order = new LinkedList<Item>();
-        menuRead = new FileHandler(loadmenu);
-        menuRead.readInputFile();
+        Order = new HashMap<String, Item>();
+        menuRead = new FileHandler();
+        menuRead.loadMenu(filename);
         create();
 
         setSize(1500, 1500);
@@ -67,8 +71,10 @@ public class MenuGUI extends JFrame {
      * We use a border layout here We split the pane horizontally with the ordered
      * items on the right and item buttons to the left We get the panels for the
      * frame and put it in the divided pane
+     * 
+     * @throws FileNotFoundException
      */
-    public void create() {
+    public void create() throws FileNotFoundException {
         JPanel mainPanel = (JPanel) getContentPane();
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, getItemButtons(), getReceipt());
 
@@ -84,18 +90,24 @@ public class MenuGUI extends JFrame {
      * grid layout and eventually returns a scroll pane with all buttons
      * 
      * @return
+     * @throws FileNotFoundException
      */
-    private JScrollPane getItemButtons() {
+    // change location of menu.csv file before running the code
+    private JScrollPane getItemButtons() throws FileNotFoundException {
         JPanel pan = new JPanel();
         pan.setLayout(new GridLayout(0, 2));
+        HashMap<String, Item> itemButtons = menuRead
+                .loadMenu("/Users/stellahchonzi/eclipse-workspace/SE1/src/CoffeShop/Data/menu.csv");
 
-        LinkedList<Item> itemButtons = menuRead.getItem();
+        // LinkedList<Item> itemButtons = menuRead.getItem();
         /**
          * making a button for each item Adding action listeners so that they can
          * respond to clicks Refresh panel is a private method that updates the right
          * panel to reflect the current status of the order
          */
-        for (final Item itemButton : itemButtons) {
+
+        Collection<Item> iterator = itemButtons.values();
+        for (final Item itemButton : iterator) {
 
             final JButton createButton = new JButton(itemButton.getName());
             createButton.setToolTipText(itemButton.getName());
@@ -157,7 +169,7 @@ public class MenuGUI extends JFrame {
         receipt.add(centerPanelScroller, BorderLayout.CENTER);
 
         orderPrice = new JTextField(20);
-        orderPrice.setText("Total Cost = $0.00");
+        orderPrice.setText("Total Cost = £0.00");
         orderPrice.setEditable(false);
 
         JButton placeOrder = new JButton("Place Order");
@@ -192,9 +204,10 @@ public class MenuGUI extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 try {
 
-                    if (!orderPrice.getText().equals("Total Cost = $0.00")) {
+                    if (!orderPrice.getText().equals("Total Cost = £0.00")) {
 
-                        menuRead.logOrder(Order, totalCost);
+                        menuRead.loadOrders(itemInformation, Order);
+                        // logOrder(Order, totalCost);
                         JOptionPane.showMessageDialog(getContentPane(), "Order has been sent to kitchen",
                                 "Order has been logged", JOptionPane.INFORMATION_MESSAGE);
                         delete();
@@ -225,8 +238,8 @@ public class MenuGUI extends JFrame {
 
     private void delete() {
 
-        orderPrice.setText("Total Cost = $0.00");
-        totalCost = new BigDecimal(0);
+        orderPrice.setText("Total Cost = £0.00");
+        totalCost = 0.0;
         Order.clear();
         itemInformation = "";
         orderItems.setText(null);
@@ -240,13 +253,13 @@ public class MenuGUI extends JFrame {
      */
     private void refreshPanel(final Item itemButton) {
         String item = itemButton.getName();
-        BigDecimal itemPrice = itemButton.getCost();
+        Double itemPrice = itemButton.getPrice();
         itemInformation += "\n" + item + "\n" + itemPrice + "\n";
         orderItems.setText(itemInformation);
-        Order.add(itemButton);
+        Order.put("", itemButton);
 
-        totalCost = totalCost.add(itemPrice);
-        orderPrice.setText("Total cost = $" + totalCost);
+        totalCost = totalCost + itemPrice;
+        orderPrice.setText("Total cost = £" + totalCost);
     }
 
 }
