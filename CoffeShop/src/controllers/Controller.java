@@ -21,6 +21,7 @@ public class Controller {
     Queue<Order> waitingOrderQueue;
     HashMap<String, Order> pendingOrder;
     Queue<Order> completedOrderQueue;
+    Queue<Order> internetOrderQueue;
     String logPath;
 
     public Controller() {
@@ -29,6 +30,7 @@ public class Controller {
         this.waitingOrderQueue = new LinkedList<>();
         this.pendingOrder = new HashMap<>();
         this.completedOrderQueue = new LinkedList<>();
+        this.internetOrderQueue = new LinkedList<>();
     }
 
     /**
@@ -123,14 +125,25 @@ public class Controller {
      * @return order if the waiting list is not empty
      */
     public synchronized Order processOrder(String staffName) {
+        Order order;
+        
         // stop
-        if (waitingOrderQueue.isEmpty() == true) {
+        if (this.waitingOrderQueue.isEmpty() == true) {
             return null;
         }
-        
+
         // or go on
-        Order order = waitingOrderQueue.poll();
-        this.pendingOrder.put(staffName, order);
+        // priority on internet orders
+        if (this.internetOrderQueue.isEmpty() == false) {
+            order = this.internetOrderQueue.poll();
+            this.pendingOrder.put(staffName, order);
+            System.out.println("\tTaking internet order:");
+        } else {
+            order = waitingOrderQueue.poll();
+            this.pendingOrder.put(staffName, order);
+            System.out.println("\tTaking normal order:");
+        }
+
         return order;
     }
 
@@ -138,12 +151,12 @@ public class Controller {
      * Move an element from pendingOrder to CompleteOrderQueue
      */
     public synchronized void completeOrder(String staffName) {
-        if(this.pendingOrder.isEmpty() == true){
+        if (this.pendingOrder.isEmpty() == true) {
             System.err.println("\n\nThis hashmap should not be accessed now. It is empty");
         } else {
             Order order = this.pendingOrder.get(staffName);
-            //in case something is wrong
-            if(order == null){
+            // in case something is wrong
+            if (order == null) {
                 System.err.println("error: staffName " + staffName + " does not match anything in the hashmap");
             }
             this.pendingOrder.remove(staffName);
@@ -156,5 +169,12 @@ public class Controller {
      */
     public synchronized void addOrder(Order order) {
         this.waitingOrderQueue.add(order);
+    }
+
+    /**
+     * Add an order to the internetOrder Queue
+     */
+    public synchronized void addInternetOrder(Order order) {
+        this.internetOrderQueue.add(order);
     }
 }
