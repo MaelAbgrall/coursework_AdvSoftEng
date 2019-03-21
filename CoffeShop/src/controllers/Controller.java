@@ -1,6 +1,8 @@
 package controllers;
 
 import java.io.FileNotFoundException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Queue;
 
@@ -50,7 +52,36 @@ public class Controller {
     }
 
     public void exit() {
-        // TODO: implement exit
+        Integer nbofCommands = 0;
+        Double totalIncome = 0.;
+        String report;
+        String path = "../CoffeeShop/log/";
+
+        for (Order order : completedOrderQueue) {
+            nbofCommands += 1;
+
+            if (order.getDiscount() == true) {
+                totalIncome += order.getTotalCost() - 2.;
+            }
+            if (order.getDiscount() == false) {
+                totalIncome += order.getTotalCost();
+            }
+        }
+
+        DateTimeFormatter dateFormater = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter timeFormater = DateTimeFormatter.ofPattern("HH:mm");
+        dateFormater.format(now);
+        timeFormater.format(now);
+
+        path += "report_" + dateFormater.format(now) + ".log";
+
+        report = "DATE: " + dateFormater.format(now);
+        report += "\nCOMPLETED AT: " + timeFormater.format(now);
+        report += "\nCommands (TOTAL): " + nbofCommands;
+        report += "\nIncome (DAY): " + totalIncome;
+
+        fileHandler.saveReport(report, path);
     }
 
     /**
