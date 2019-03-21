@@ -8,6 +8,8 @@ import java.util.Queue;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
@@ -53,15 +55,17 @@ public class FileHandler {
                 Date time = dateCast(result[1]);
                 if (time != null) {
                     // create a new order
+                    System.out.println("Creating order " + order);
                     order = new Order(result[0], result[3], time);
                     tempHashmap.put(orderID, order);
                 }
             }
 
-            // retrieve the item oject and add it to the order            
+            // retrieve the item oject and add it to the order
             Item item = menu.get(result[2]);
-            if(item != null){
+            if (item != null) {
                 order.addItem(item);
+                System.out.println("\tAdding item " + item + " to order " + order);
                 // calculate total and discount
                 order.setTotalCost(calculateTotal(order));
                 order.setDiscount(calculateDiscount(order));
@@ -204,5 +208,23 @@ public class FileHandler {
      */
     public void saveMenu(HashMap<Item, String> menu, String path) {
         // TODO: implement saveMenu
+    }
+
+    public void saveReport(String report, String path) {
+        //TODO test saveReport
+        File reportFile = new File(path);
+        try {
+            reportFile.createNewFile();
+        } catch (IOException e2) {
+            e2.printStackTrace();
+        }
+
+        FileWriter fWrite;
+        try {
+            fWrite = new FileWriter(path);
+            fWrite.write(report);
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
     }
 }

@@ -43,14 +43,14 @@ public class fileHandlerTest {
                 System.out.println("Key : " + entry.getKey() + " Value : " + entry.getValue());
             }
 
-            System.out.println("loadMenu done \n\n\n");
+            
             Queue<Order> testQueue = fileHandler.loadOrders(orderPath, testMenu);
             for(Order order: testQueue){
                 System.out.println(order);
                 System.out.println("total: " + order.getTotalCost());
                 System.out.println("discount: " + order.getDiscount());
             }
-            System.out.println("loadOrder done");
+            
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
