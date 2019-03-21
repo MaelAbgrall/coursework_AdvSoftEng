@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Queue;
 
 import models.item.Item;
@@ -18,13 +19,16 @@ public class Controller {
 
     HashMap<String, Item> menu;
     Queue<Order> waitingOrderQueue;
-    Queue<Order> pendingOrderQueue;
+    HashMap<Order, String> pendingOrder;
     Queue<Order> completedOrderQueue;
     String logPath;
 
     public Controller() {
-        // TODO: implement constructor
+        // TODO: add link to the view
         this.fileHandler = new FileHandler();
+        this.waitingOrderQueue = new LinkedList<>();
+        this.pendingOrder = new HashMap<>();
+        this.completedOrderQueue = new LinkedList<>();
     }
 
     /**
@@ -51,6 +55,9 @@ public class Controller {
         }
     }
 
+    /**
+     * exit the program and generate a report
+     */
     public void exit() {
         Integer nbofCommands = 0;
         Double totalIncome = 0.;
@@ -87,8 +94,8 @@ public class Controller {
     /**
      * get the pendingOrderQueue
      */
-    public Queue<Order> getPending() {
-        return pendingOrderQueue;
+    public HashMap<Order, String> getPending() {
+        return pendingOrder;
     }
 
     /**
@@ -105,4 +112,39 @@ public class Controller {
         return completedOrderQueue;
     }
 
+    /**
+     * return the first element from the Queue (FIFO) and remove it from the queue
+     * Then add it to the pending hashmap. The return state is used to indicate to
+     * kill of not the thread
+     * 
+     * @param staffName name of the thread
+     * 
+     * @return null if the waiting list is empty
+     * @return order if the waiting list is not empty
+     */
+    public synchronized Order processOrder(String staffName) {
+        // stop
+        if (waitingOrderQueue.isEmpty() == true) {
+            return null;
+        }
+        
+        // or go on
+        Order order = waitingOrderQueue.poll();
+        this.pendingOrder.put(order, staffName);
+        return order;
+    }
+
+    /**
+     * Move an element from pendingOrder to CompleteOrderQueue
+     */
+    public synchronized void completeOrder() {
+
+    }
+
+    /**
+     * Add an order to the waitingOrder Queue
+     */
+    public synchronized void addOrder() {
+
+    }
 }

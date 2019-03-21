@@ -4,17 +4,17 @@ import controllers.Controller;
 
 /**
  * Staff
+ * @param controller controller
+ * @param timer sleep time (to control simulation speed)
  */
-public class Staff implements Runnable {
+public class Client implements Runnable {
     Controller controller;
-    String staffName;
     Integer timer;
 
-    public Staff(Controller controller, String staffName, Integer timer) {
+    public Client(Controller controller, Integer timer) {
         this.controller = controller;
-        this.staffName = staffName;
         this.timer = timer;
-        System.out.println("Staff created.\n\tController: "+ controller + "\n\tName: " + staffName + "\n\tTimer: " + this.timer);
+        System.out.println("Client thread created.\n\tController: "+ this.controller + "\n\tTimer:" + this.timer);
     }
 
     public void run() { // the thread's code
@@ -22,11 +22,10 @@ public class Staff implements Runnable {
             try {
                 Thread.sleep(this.timer);
                 //counter.increment();
-                System.out.println("plop i'm thread " + this.staffName);
             } catch (InterruptedException e) {
                 System.out.println(e.getMessage());
             }
         }
-        System.out.println("thread" + this.staffName + "is exiting");
+        System.out.println("job Done");
     }
 }

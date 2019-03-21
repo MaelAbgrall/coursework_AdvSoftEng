@@ -55,7 +55,7 @@ public class FileHandler {
                 Date time = dateCast(result[1]);
                 if (time != null) {
                     // create a new order
-                    System.out.println("Creating order " + order);
+                    System.out.println("Creating order " + result[0]);
                     order = new Order(result[0], result[3], time);
                     tempHashmap.put(orderID, order);
                 }
