@@ -29,7 +29,7 @@ public class ActivityLog extends JFrame {
 		//for(Order o : orders ) {
 		//	top.add(new Label(o.getName()));
 		//}
-		// there are the labels of the panels
+		// these are the labels of the panels
 		top.setPreferredSize(new Dimension(700, 150));
 		top.add(new Label("Order Queue"));
 		
