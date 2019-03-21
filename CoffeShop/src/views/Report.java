@@ -8,6 +8,9 @@ package views;
 import java.awt.*;
 import javax.swing.*;
 
+import models.Order;
+import models.item.Item;
+
 public class Report extends JFrame {
 
     private JFrame frame;
@@ -35,6 +38,19 @@ public class Report extends JFrame {
 
         Object[][] data = { { "Martinee", "Drinks", "3.5", "2" }, { "Brownie", "Dessert", "2.5", "4" },
                 { "Cheese Sandwich", "Meal", "5.2", "10" }, { "Burger Sanwich", "Meal", "7.2", "8" } };
+        
+      /** IF THERE WAS NO ERROR ON THE PLACE ORDER, THIS BLOCK OF CODE WILL BE USED TO POPULATE THE TABLE DYNAMICALLY
+      
+      List<Order> orders = controller.getOrders();
+        
+        Object[][] data = new Object[orders.size()][4];
+        
+                for (Order ord : orders) {
+                	List<Item> items = ord.getItemList();
+              for(Item i : items)
+        	          data[i] = {i.getName(), i.getId(), i.getPrice(), i.getPrice()}; //THERE IS NONE FOR QUANTITY
+        }**/
+        
 
         table = new JTable(data, columnNames);
         table.setPreferredScrollableViewportSize(new Dimension(500, 70));
