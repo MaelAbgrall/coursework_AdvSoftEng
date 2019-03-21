@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Queue;
 
 import controllers.Controller;
+import controllers.FileHandler;
 import models.Order;
 import models.item.Item;
 
@@ -63,11 +64,13 @@ public class Client implements Runnable {
             // add a new order to the waiting list
             if(this.newWaitingOrderQueue.isEmpty() == false){
                 controller.addOrder(this.newWaitingOrderQueue.poll());
+                System.out.println("Normal order added");
             }
 
             // add a new order to the internet waiting list
             if(this.internetOrderQueue.isEmpty() == false){
                 controller.addOrder(this.internetOrderQueue.poll());
+                System.out.println("Internet order added");
             }
 
             this.slowDown();

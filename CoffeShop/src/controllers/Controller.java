@@ -60,11 +60,10 @@ public class Controller {
     /**
      * exit the program and generate a report
      */
-    public void exit() {
+    public void exit(String path) {
         Integer nbofCommands = 0;
         Double totalIncome = 0.;
         String report;
-        String path = "../CoffeeShop/log/";
 
         for (Order order : completedOrderQueue) {
             nbofCommands += 1;
@@ -83,7 +82,7 @@ public class Controller {
         dateFormater.format(now);
         timeFormater.format(now);
 
-        path += "report_" + dateFormater.format(now) + ".log";
+        path += "report.log";
 
         report = "DATE: " + dateFormater.format(now);
         report += "\nCOMPLETED AT: " + timeFormater.format(now);
@@ -176,5 +175,25 @@ public class Controller {
      */
     public synchronized void addInternetOrder(Order order) {
         this.internetOrderQueue.add(order);
+    }
+
+    
+    
+    // those are two last minute added methods
+    
+    
+    /**
+     * get the menu
+     * @return menu<String, Item>
+     */
+    public HashMap<String, Item> getMenu() {
+        return this.menu;
+    }
+
+    /**
+     * get the fileHandler
+     */
+    public FileHandler getfileHandler() {
+        return this.fileHandler;
     }
 }
