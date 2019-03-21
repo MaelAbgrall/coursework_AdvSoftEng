@@ -40,8 +40,9 @@ public class Report extends JFrame {
         table.setPreferredScrollableViewportSize(new Dimension(500, 70));
         table.setFillsViewportHeight(true);
         
-        tModel = new CLS_Controller2();
-        table.setModel(tModel);
+        //TODO
+        //tModel = new CLS_Controller2();
+        //table.setModel(tModel);
 
 
         JScrollPane scrollPane = new JScrollPane(table);

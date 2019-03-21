@@ -55,10 +55,6 @@ public class Controller {
         Integer nbofCommands = 0;
         Double totalIncome = 0.;
         String report;
-<<<<<<< HEAD
-        String reportBody;
-=======
->>>>>>> master
         String path = "../CoffeeShop/log/";
 
         for (Order order : completedOrderQueue) {
@@ -84,11 +80,6 @@ public class Controller {
         report += "\nCOMPLETED AT: " + timeFormater.format(now);
         report += "\nCommands (TOTAL): " + nbofCommands;
         report += "\nIncome (DAY): " + totalIncome;
-<<<<<<< HEAD
-        report += "\n\n";
-        
-=======
->>>>>>> master
 
         fileHandler.saveReport(report, path);
     }
